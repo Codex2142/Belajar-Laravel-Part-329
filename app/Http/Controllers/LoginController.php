@@ -29,17 +29,23 @@ class LoginController extends Controller
         return redirect()->route('login')->with('success', 'Registrasi berhasil, silakan login!');
     }
 
-    public function login(Request $request)
+    public function authenticate(Request $request)
     {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
         ]);
 
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            return redirect()->route('ortu.read');
-        } else {
-            return back()->withErrors(['email' => 'Email atau password salah.'])->withInput();
+        // Cek kredensial dan login pengguna
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();  // Regenerasi session setelah login berhasil
+
+            return redirect()->intended('/ortu');  // Redirect setelah login
         }
+
+        // Jika login gagal
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ])->onlyInput('email');
     }
 }

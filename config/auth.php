@@ -39,8 +39,10 @@ return [
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
+            'redirect' => '/home',  // Redirect setelah login
         ],
     ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -62,13 +64,8 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\User::class),
+            'model' => App\Models\Login::class,
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
     ],
 
     /*

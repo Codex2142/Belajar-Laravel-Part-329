@@ -2,15 +2,24 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Login extends Model
+class Login extends Authenticatable
 {
-    protected $table = 'login';
+    use Notifiable;
+
+    protected $table = 'login';  // Pastikan nama tabel sesuai dengan yang Anda inginkan
+
     protected $fillable = [
         'email',
-        'level',
+        'level', // Optional: Bisa digunakan jika level ada
         'password',
     ];
-    
+
+    // Jika level digunakan untuk otentikasi, Anda bisa menambahkan metode untuk mendapatkan level pengguna
+    public function getAuthLevel()
+    {
+        return $this->level;
+    }
 }
