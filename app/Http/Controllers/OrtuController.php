@@ -41,7 +41,7 @@ class OrtuController extends Controller
         return view('ortu.edit', compact('ortu', 'kota'));
     }
 
-    public function update(Request $request, Ortu $ortu)
+    public function update(Request $request,  $ortu)
     {
         $request->validate([
             'nama_ortu' => 'required',

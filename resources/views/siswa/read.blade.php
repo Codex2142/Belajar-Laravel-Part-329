@@ -27,7 +27,7 @@
                 </ul>
             </div>
             @endif
-            <a href="/siswa/create"><button type="button" class="btn btn-primary">Tambah</button></a>
+            <a href="/siswa/create"><button type="button" class="btn btn-primary mb-4">Tambah</button></a>
             <table class="table">
                 <thead>
                     <th>No</th>
